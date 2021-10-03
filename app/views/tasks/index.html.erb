@@ -1,0 +1,74 @@
+<% if user_signed_in? %>
+
+  <p id="notice"><%= notice %></p>
+
+  <h1>Tasks</h1>
+
+  <table class="table table-bordered">
+  <!-- <thead>
+      <tr>
+        <th colspan="1" >Complete</th>  
+        <th colspan="10">Task name</th>
+        <th>Deadline</th> 
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+  -->
+    <tbody>
+      <% @tasks.each do |task| %>
+
+        <% if task.user == current_user %>
+          <% if task.complete %>
+            <tr class="table-secondary">
+              <td colspan="1"> 
+                <center>
+                  <%= form_for(task) do |f| %>
+                    <%= f.text_field :task_name, type: 'hidden' %>
+                    <%= f.check_box :complete, :checked => false, :style => 'visibility: hidden' %>
+                    <%= f.submit "  ", class:"btn btn-success btn-sm" %>
+                  <% end %>
+                </center>
+              </td>
+              <!-- <td><%= task.complete %></td>  -->
+              <td colspan="10"><%= link_to task.task_name, task_path(task)  %></td>
+              
+              <!-- <td><%= task.deadline %></td> -->
+              <td colspan="1"><%= link_to 'X', task, class:"btn btn-outline-danger btn-sm",method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% else %>
+              <tr>
+              <td colspan="1">
+                <center>
+                  <%= form_for(task) do |f| %>
+                    <%= f.text_field :task_name, type: 'hidden' %>
+                    <%= f.check_box :complete, :checked => true, :style => 'visibility: hidden' %>
+                    <%= f.submit "  ", class:"btn btn-secondary btn-sm" %>
+                  <% end %>
+                </center>
+              </td>
+              <!-- <td><%= task.complete %></td>  -->
+              <td colspan="10"><%= link_to task.task_name, task_path(task) %></td>
+            
+              <!-- <td><%= task.deadline %></td> -->
+              <td colspan="1"><%= link_to 'X', task, class:"btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+<% else %>
+
+<br>
+  <br>
+
+  <h1> WelCome to Task Managment System </h1>
+  <h2>Please Sign in to continue </h2>
+
+<% end %>
+
+<!-- # <%= link_to 'New Task', new_task_path %> -->
+
+
