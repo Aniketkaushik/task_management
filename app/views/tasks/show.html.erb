@@ -16,11 +16,12 @@
   <%= @task.complete %>
 </p>
 
+
 <p>
-<strong>Preview:</strong>
-<p>
-<embed src= "<%= polymorphic_url(@task.file) %>" type="application/pdf" >
+  <strong>Preview:</strong>
 </p>
+<p>
+  <%= image_tag (@task.file) %>
 </p>
 
 
