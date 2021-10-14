@@ -1,5 +1,8 @@
 # README
 
+* Ruby Version 3.0.2
+* Rails Version 6.1.4.1
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
